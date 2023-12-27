@@ -1,6 +1,6 @@
 package me.alex_s168.math.vec
 
-import me.alex_s168.math.Angle
+import me.alex_s168.math.Anglef
 
 interface NumVecLike<T: Number, S>: VecLike<T, S> {
     operator fun plus(other: NumVecLike<*, *>): S
@@ -40,6 +40,6 @@ interface NumVecLike<T: Number, S>: VecLike<T, S> {
         lerpSelf(otherAndT.first, otherAndT.second)
     infix fun distance(other: NumVecLike<*, *>): Double
     infix fun distanceSqr(other: NumVecLike<*, *>): Double
-    infix fun angle(other: NumVecLike<*, *>): Angle
+    infix fun angle(other: NumVecLike<*, *>): Anglef
     fun zeroSelf(): S
 }

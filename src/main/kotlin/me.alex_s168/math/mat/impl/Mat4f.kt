@@ -1,6 +1,6 @@
 package me.alex_s168.math.mat.impl
 
-import me.alex_s168.math.Angle
+import me.alex_s168.math.Anglef
 import me.alex_s168.math.mat.MatF
 import me.alex_s168.math.vec.impl.Vec3f
 import kotlin.math.cos
@@ -127,7 +127,7 @@ class Mat4f(
                 0f, 0f, 0f, 1f
             )
 
-        fun perspective(fov: Angle, aspect: Float, near: Float, far: Float): Mat4f {
+        fun perspective(fov: Anglef, aspect: Float, near: Float, far: Float): Mat4f {
             val frustumLength = far - near
             val yScale = ((1 / tan(fov.radians / 2)) * aspect)
             val xScale = yScale / aspect
@@ -207,7 +207,7 @@ class Mat4f(
         println(this)
     }
 
-    fun rotateSelf(by: Vec3f, angle: Angle) {
+    fun rotateSelf(by: Vec3f, angle: Anglef) {
         by *= angle.radians
         this *= rotationMatrix(by.x, by.y, by.z)
     }

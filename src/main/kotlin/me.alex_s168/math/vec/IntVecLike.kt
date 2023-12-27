@@ -1,6 +1,6 @@
 package me.alex_s168.math.vec
 
-import me.alex_s168.math.Angle
+import me.alex_s168.math.Anglef
 import java.nio.IntBuffer
 
 interface IntVecLike<S: IntVecLike<S>>: NumVecLike<Int, S> {
@@ -229,6 +229,6 @@ interface IntVecLike<S: IntVecLike<S>>: NumVecLike<Int, S> {
         return result
     }
 
-    override fun angle(other: NumVecLike<*, *>): Angle =
-        Angle.fromRadians(kotlin.math.acos((this dot other) / (length() * other.length())).toFloat())
+    override fun angle(other: NumVecLike<*, *>): Anglef =
+        Anglef.fromRadians(kotlin.math.acos((this dot other) / (length() * other.length())).toFloat())
 }

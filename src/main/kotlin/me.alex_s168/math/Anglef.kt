@@ -1,6 +1,6 @@
 package me.alex_s168.math
 
-data class Angle(
+data class Anglef(
     internal val valRadians: Float
 ) {
     val radians = valRadians
@@ -13,12 +13,12 @@ data class Angle(
 
     companion object {
         fun fromRadians(radians: Float) =
-            Angle(radians)
+            Anglef(radians)
 
         fun fromDegrees(degrees: Float) =
-            Angle(degrees * Math.PI.toFloat() / 180f)
+            Anglef(degrees * Math.PI.toFloat() / 180f)
 
         fun fromGradians(gradians: Float) =
-            Angle(gradians * Math.PI.toFloat() / 200f)
+            Anglef(gradians * Math.PI.toFloat() / 200f)
     }
 }

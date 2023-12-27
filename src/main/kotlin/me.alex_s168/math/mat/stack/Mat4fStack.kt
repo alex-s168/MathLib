@@ -1,6 +1,6 @@
 package me.alex_s168.math.mat.stack
 
-import me.alex_s168.math.Angle
+import me.alex_s168.math.Anglef
 import me.alex_s168.math.mat.impl.Mat4f
 import me.alex_s168.math.vec.impl.Vec3f
 
@@ -22,7 +22,7 @@ class Mat4fStack(
         stack.last().translateSelf(a)
     }
 
-    fun rotate(a: Vec3f, angle: Angle) {
+    fun rotate(a: Vec3f, angle: Anglef) {
         stack.last().rotateSelf(a, angle)
     }
 
