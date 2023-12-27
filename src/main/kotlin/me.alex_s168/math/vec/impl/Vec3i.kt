@@ -1,5 +1,6 @@
 package me.alex_s168.math.vec.impl
 
+import me.alex_s168.math.EnclosedVolume3
 import me.alex_s168.math.vec.VecI
 
 class Vec3i(
@@ -42,6 +43,16 @@ class Vec3i(
 
     override fun new() =
         Vec3i()
+
+    infix fun inside(vol: EnclosedVolume3) =
+        vol.isInside(Vec3f(x.toFloat(), y.toFloat(), z.toFloat()))
+
+    infix fun cross(other: Vec3i) =
+        Vec3i(
+            y * other.z - z * other.y,
+            z * other.x - x * other.z,
+            x * other.y - y * other.x
+        )
 
     companion object {
         fun wrap(data: IntArray, offset: Int = 0) =

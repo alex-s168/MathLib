@@ -13,6 +13,6 @@ repositories {
 }
 
 dependencies {
-  implementation("me.alex_s168:mathlib:0.2")
+  implementation("me.alex_s168:mathlib:0.3")
 }
 ```
