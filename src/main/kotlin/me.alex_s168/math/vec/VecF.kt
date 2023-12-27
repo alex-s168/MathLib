@@ -1,5 +1,6 @@
 package me.alex_s168.math.vec
 
+import java.nio.ByteBuffer
 import java.nio.FloatBuffer
 import java.util.*
 
@@ -29,6 +30,12 @@ abstract class VecF<S: VecF<S>>(
         }
     }
 
+    override fun writeTo(buff: ByteBuffer) {
+        for (i in offset until size + offset) {
+            buff.putFloat(data[i])
+        }
+    }
+
     override fun from(other: VecLike<Float, S>) {
         if (other.size != size) {
             throw IllegalArgumentException("Size mismatch!")
@@ -53,6 +60,15 @@ abstract class VecF<S: VecF<S>>(
         }
         for (i in offset until size + offset) {
             data[i] = other.get()
+        }
+    }
+
+    override fun from(other: ByteBuffer) {
+        if (other.remaining() != size * 4) {
+            throw IllegalArgumentException("Size mismatch!")
+        }
+        for (i in offset until size + offset) {
+            data[i] = other.getFloat()
         }
     }
 

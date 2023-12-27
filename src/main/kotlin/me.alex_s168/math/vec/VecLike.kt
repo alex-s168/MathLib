@@ -1,5 +1,7 @@
 package me.alex_s168.math.vec
 
+import java.nio.ByteBuffer
+
 interface VecLike<T, S>: Collection<T> {
     operator fun get(index: Int): T
     operator fun set(index: Int, value: T)
@@ -37,4 +39,7 @@ interface VecLike<T, S>: Collection<T> {
         false
 
     fun copy(): S
+
+    fun from(buf: ByteBuffer)
+    fun writeTo(buf: ByteBuffer)
 }

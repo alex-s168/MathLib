@@ -1,5 +1,6 @@
 package me.alex_s168.math.vec
 
+import java.nio.ByteBuffer
 import java.nio.IntBuffer
 import java.util.Arrays
 
@@ -29,6 +30,12 @@ abstract class VecI<S: VecI<S>>(
         }
     }
 
+    override fun writeTo(buff: ByteBuffer) {
+        for (i in offset until size + offset) {
+            buff.putInt(data[i])
+        }
+    }
+
     override fun from(other: VecLike<Int, S>) {
         if (other.size != size) {
             throw IllegalArgumentException("Size mismatch!")
@@ -53,6 +60,15 @@ abstract class VecI<S: VecI<S>>(
         }
         for (i in offset until size + offset) {
             data[i] = other.get()
+        }
+    }
+
+    override fun from(other: ByteBuffer) {
+        if (other.remaining() != size * 4) {
+            throw IllegalArgumentException("Size mismatch!")
+        }
+        for (i in offset until size + offset) {
+            data[i] = other.getInt()
         }
     }
 
