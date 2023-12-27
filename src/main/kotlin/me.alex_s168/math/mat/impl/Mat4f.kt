@@ -2,6 +2,7 @@ package me.alex_s168.math.mat.impl
 
 import me.alex_s168.math.Anglef
 import me.alex_s168.math.mat.MatF
+import me.alex_s168.math.vec.impl.Vec3af
 import me.alex_s168.math.vec.impl.Vec3f
 import kotlin.math.cos
 import kotlin.math.sin
@@ -195,6 +196,14 @@ class Mat4f(
         private fun rotationMatrix(rx: Float, ry: Float, rz: Float): Mat4f {
             return rotationMatrixZ(rz) * rotationMatrixY(ry) * rotationMatrixX(rx)
         }
+
+        fun rotationMatrix(rotMat: Mat3f): Mat4f =
+            Mat4f(
+                rotMat.m00, rotMat.m01, rotMat.m02, 0f,
+                rotMat.m10, rotMat.m11, rotMat.m12, 0f,
+                rotMat.m20, rotMat.m21, rotMat.m22, 0f,
+                0f, 0f, 0f, 1f
+            )
     }
 
     fun translateSelf(x: Float, y: Float, z: Float) {
@@ -208,8 +217,23 @@ class Mat4f(
     }
 
     fun rotateSelf(by: Vec3f, angle: Anglef) {
-        by *= angle.radians
+        rotateSelf(by * angle.radians)
+    }
+
+    fun rotateSelf(by: Vec3f) {
         this *= rotationMatrix(by.x, by.y, by.z)
+    }
+
+    fun rotateSelf(by: Mat3f) {
+        this *= rotationMatrix(by)
+    }
+
+    fun rotateSelf(by: Vec3af) {
+        rotateSelf(Vec3f(by.yaw.radians, by.pitch.radians, by.roll.radians))
+    }
+
+    fun scaleSelf(x: Float, y: Float, z: Float) {
+        this *= scaleMatrix(x, y, z)
     }
 
     fun scaleSelf(by: Vec3f) {

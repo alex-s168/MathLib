@@ -54,6 +54,14 @@ class Vec3f(
             x * other.y - y * other.x
         )
 
+    fun rotate(quaternionf: Quaternionf) =
+        Quaternionf.rotateVecByQuat(this, quaternionf)
+
+    fun rotateSelf(quaternionf: Quaternionf) =
+        Quaternionf.rotateVecByQuat(this, quaternionf).also {
+            this.from(it)
+        }
+
     companion object {
         fun wrap(data: FloatArray, offset: Int = 0) =
             Vec3f(data, offset)

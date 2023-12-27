@@ -11,6 +11,10 @@ data class Anglef(
     val gradians get() =
         valRadians * 200f / Math.PI.toFloat()
 
+    val normalized by lazy {
+        Anglef(valRadians % (2 * Math.PI.toFloat()))
+    }
+
     companion object {
         fun fromRadians(radians: Float) =
             Anglef(radians)
