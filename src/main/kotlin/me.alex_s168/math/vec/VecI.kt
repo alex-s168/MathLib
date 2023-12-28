@@ -11,11 +11,14 @@ abstract class VecI<S: VecI<S>>(
 ): IntVecLike<S> {
 
     override fun toArray(): IntArray {
-        return data.copyOf()
+        return data.copyOfRange(offset, size + offset)
     }
 
     override fun asArray(): IntArray {
-        return data
+        if (offset == 0 && data.size == size) {
+            return data
+        }
+        throw UnsupportedOperationException("Cannot return backing array")
     }
 
     override fun writeTo(buffer: IntBuffer) {

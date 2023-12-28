@@ -9,11 +9,14 @@ abstract class MatI<S: MatI<S>>(
 ): IntMatLike<S> {
 
     override fun toArray(): IntArray {
-        return data.copyOf()
+        return data.copyOfRange(offset, size + offset)
     }
 
     override fun asArray(): IntArray {
-        return data
+        if (offset == 0 && data.size == size) {
+            return data
+        }
+        throw UnsupportedOperationException("Cannot return backing array")
     }
 
     override fun get(row: Int, col: Int): Int {
