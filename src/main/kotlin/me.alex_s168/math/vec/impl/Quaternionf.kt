@@ -3,6 +3,7 @@ package me.alex_s168.math.vec.impl
 import me.alex_s168.math.Anglef
 import me.alex_s168.math.mat.impl.Mat3f
 import me.alex_s168.math.vec.FloatVecLike
+import me.alex_s168.math.vec.NumVecLike
 import me.alex_s168.math.vec.VecF
 import me.alex_s168.math.vec.VecLike
 import java.nio.ByteBuffer
@@ -91,12 +92,29 @@ data class Quaternionf(
     val conj: Quaternionf get() =
         Quaternionf(-x, -y, -z, w)
 
-    override fun timesAssign(f: Float) {
-        x *= f
-        y *= f
-        z *= f
-        w *= f
+    override fun timesAssign(other: Float) {
+        x *= other
+        y *= other
+        z *= other
+        w *= other
     }
+
+    operator fun timesAssign(other: Quaternionf) {
+        val x = this.x
+        val y = this.y
+        val z = this.z
+        val w = this.w
+        this.x = w * other.x + x * other.w + y * other.z - z * other.y
+        this.y = w * other.y + y * other.w + z * other.x - x * other.z
+        this.z = w * other.z + z * other.w + x * other.y - y * other.x
+        this.w = w * other.w - x * other.x - y * other.y - z * other.z
+    }
+
+    fun clone(): Quaternionf =
+        Quaternionf().also { it.from(this) }
+
+    operator fun times(other: Quaternionf): Quaternionf =
+        clone().also { it *= other }
 
     fun rotMat3(): Mat3f {
         val x2 = x * x
