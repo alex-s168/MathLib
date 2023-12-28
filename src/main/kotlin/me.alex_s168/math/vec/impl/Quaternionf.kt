@@ -110,11 +110,26 @@ data class Quaternionf(
         this.w = w * other.w - x * other.x - y * other.y - z * other.z
     }
 
+    operator fun divAssign(other: Quaternionf) {
+        val x = this.x
+        val y = this.y
+        val z = this.z
+        val w = this.w
+        val d = 1f / (other.x * other.x + other.y * other.y + other.z * other.z + other.w * other.w)
+        this.x = (w * other.x - x * other.w - y * other.z + z * other.y) * d
+        this.y = (w * other.y - y * other.w - z * other.x + x * other.z) * d
+        this.z = (w * other.z - z * other.w - x * other.y + y * other.x) * d
+        this.w = (w * other.w + x * other.x + y * other.y + z * other.z) * d
+    }
+
     fun clone(): Quaternionf =
         Quaternionf().also { it.from(this) }
 
     operator fun times(other: Quaternionf): Quaternionf =
         clone().also { it *= other }
+
+    operator fun div(other: Quaternionf): Quaternionf =
+        clone().also { it /= other }
 
     fun rotMat3(): Mat3f {
         val x2 = x * x
