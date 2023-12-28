@@ -57,10 +57,11 @@ interface FloatMatLike<S: FloatMatLike<S>>: NumMatLike<Float, S> {
     }
 
     override fun timesAssign(other: NumMatLike<*, *>) {
-        for (i in 0 until height) {
-            for (j in 0 until width) {
+        val minWidth = kotlin.math.min(width, other.width)
+        for (i in 0 until kotlin.math.min(height, other.height)) {
+            for (j in 0 until minWidth) {
                 var sum = 0f
-                for (k in 0 until width) {
+                for (k in 0 until minWidth) {
                     sum += this[i, k] * other[k, j].toFloat()
                 }
                 this[i, j] = sum

@@ -2,8 +2,10 @@ package me.alex_s168.math.mat.impl
 
 import me.alex_s168.math.Anglef
 import me.alex_s168.math.mat.MatF
+import me.alex_s168.math.vec.impl.Quaternionf
 import me.alex_s168.math.vec.impl.Vec3af
 import me.alex_s168.math.vec.impl.Vec3f
+import me.alex_s168.math.vec.impl.Vec4f
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.tan
@@ -138,7 +140,6 @@ class Mat4f(
             mat.m22 = -((far + near) / frustumLength)
             mat.m23 = -1f
             mat.m32 = -((2 * near * far) / frustumLength)
-            mat.m33 = 0f
             return mat
         }
 
@@ -206,38 +207,56 @@ class Mat4f(
             )
     }
 
-    fun translateSelf(x: Float, y: Float, z: Float) {
+    fun translateSelf(x: Float, y: Float, z: Float): Mat4f {
         this *= translateMatrix(x, y, z)
+        return this
     }
 
-    fun translateSelf(by: Vec3f) {
-        println(this)
+    fun translateSelf(by: Vec3f): Mat4f {
         translateSelf(by.x, by.y, by.z)
-        println(this)
+        return this
     }
 
-    fun rotateSelf(by: Vec3f, angle: Anglef) {
+    fun rotateSelf(by: Vec3f, angle: Anglef): Mat4f {
         rotateSelf(by * angle.radians)
+        return this
     }
 
-    fun rotateSelf(by: Vec3f) {
+    fun rotateSelf(by: Vec3f): Mat4f {
         this *= rotationMatrix(by.x, by.y, by.z)
+        return this
     }
 
-    fun rotateSelf(by: Mat3f) {
+    fun rotateSelf(by: Mat3f): Mat4f {
         this *= rotationMatrix(by)
+        return this
     }
 
-    fun rotateSelf(by: Vec3af) {
+    fun rotateSelf(by: Quaternionf): Mat4f {
+        this *= rotationMatrix(by.rotMat3())
+        return this
+    }
+
+    fun rotateSelf(by: Vec3af): Mat4f {
         rotateSelf(Vec3f(by.yaw.radians, by.pitch.radians, by.roll.radians))
+        return this
     }
 
-    fun scaleSelf(x: Float, y: Float, z: Float) {
+    fun scaleSelf(x: Float, y: Float, z: Float): Mat4f {
         this *= scaleMatrix(x, y, z)
+        return this
     }
 
-    fun scaleSelf(by: Vec3f) {
+    fun scaleSelf(by: Vec3f): Mat4f {
         this *= scaleMatrix(by.x, by.y, by.z)
+        return this
     }
+
+    operator fun times(vec: Vec4f): Vec4f = Vec4f(
+            m00 * vec.x + m01 * vec.y + m02 * vec.z + m03 * vec.w,
+            m10 * vec.x + m11 * vec.y + m12 * vec.z + m13 * vec.w,
+            m20 * vec.x + m21 * vec.y + m22 * vec.z + m23 * vec.w,
+            m30 * vec.x + m31 * vec.y + m32 * vec.z + m33 * vec.w
+    )
 
 }

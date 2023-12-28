@@ -15,6 +15,31 @@ data class Anglef(
         Anglef(valRadians % (2 * Math.PI.toFloat()))
     }
 
+    operator fun plus(other: Anglef) =
+        Anglef(valRadians + other.valRadians)
+
+    operator fun minus(other: Anglef) =
+        Anglef(valRadians - other.valRadians)
+
+    operator fun times(other: Anglef) =
+        Anglef(valRadians * other.valRadians)
+
+    operator fun div(other: Anglef) =
+        Anglef(valRadians / other.valRadians)
+
+    operator fun times(other: Float) =
+        Anglef(valRadians * other)
+
+    operator fun div(other: Float) =
+        Anglef(valRadians / other)
+
+    operator fun unaryMinus() =
+        Anglef(-valRadians)
+
+    override fun toString(): String {
+        return "$degrees°"
+    }
+
     companion object {
         fun fromRadians(radians: Float) =
             Anglef(radians)

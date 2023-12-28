@@ -1,5 +1,6 @@
 package me.alex_s168.math.vec.impl
 
+import me.alex_s168.math.Anglef
 import me.alex_s168.math.mat.impl.Mat3f
 import me.alex_s168.math.vec.FloatVecLike
 import me.alex_s168.math.vec.VecF
@@ -127,8 +128,8 @@ data class Quaternionf(
         fun wrap(vec: VecF<*>): Quaternionf =
             Quaternionf(Vec4f.wrap(vec))
 
-        fun fromAxisAngle(axis: Vec3f, angle: Float): Quaternionf {
-            val halfAngle = angle / 2
+        fun fromAxisAngle(axis: Vec3f, angle: Anglef): Quaternionf {
+            val halfAngle = angle.radians / 2
             val sin = sin(halfAngle.toDouble()).toFloat()
             val cos = cos(halfAngle.toDouble()).toFloat()
             return Quaternionf(axis.x * sin, axis.y * sin, axis.z * sin, cos)
