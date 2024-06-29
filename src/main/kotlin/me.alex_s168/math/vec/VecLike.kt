@@ -47,7 +47,7 @@ interface VecLike<T, S>: Collection<T> {
 }
 
 @OptIn(ExperimentalContracts::class)
-inline fun <T, S, R, V: VecLike<R, S>> VecLike<T, S>.modifyTo(dest: V, each: (T) -> R): V {
+inline fun <T, S, R, VS, V: VecLike<R, VS>> VecLike<T, S>.modifyTo(dest: V, each: (T) -> R): V {
     contract {
         callsInPlace(each)
     }
@@ -60,7 +60,7 @@ inline fun <T, S, R, V: VecLike<R, S>> VecLike<T, S>.modifyTo(dest: V, each: (T)
 }
 
 @OptIn(ExperimentalContracts::class)
-inline fun <T, S, R, V: VecLike<R, S>> VecLike<T, S>.modifyWithIndexTo(dest: V, each: (Int, T) -> R): V {
+inline fun <T, S, R, VS, V: VecLike<R, VS>> VecLike<T, S>.modifyWithIndexTo(dest: V, each: (Int, T) -> R): V {
     contract {
         callsInPlace(each)
     }
