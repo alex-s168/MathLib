@@ -28,8 +28,9 @@ abstract class VecF<S: VecF<S>>(
     }
 
     override fun writeTo(arr: FloatArray, offset: Int) {
+        var writer = offset
         for (i in this.offset until size + this.offset) {
-            arr[i + offset] = data[i]
+            arr[writer++] = data[i]
         }
     }
 
@@ -43,8 +44,9 @@ abstract class VecF<S: VecF<S>>(
         if (other.size != size) {
             throw IllegalArgumentException("Size mismatch!")
         }
+        var reader = 0
         for (i in offset until size + offset) {
-            data[i] = other[i]
+            data[i] = other[reader ++]
         }
     }
 
@@ -52,8 +54,9 @@ abstract class VecF<S: VecF<S>>(
         if (other.size != size) {
             throw IllegalArgumentException("Size mismatch!")
         }
+        var reader = 0
         for (i in offset until size + offset) {
-            data[i] = other[i]
+            data[i] = other[reader ++]
         }
     }
 
