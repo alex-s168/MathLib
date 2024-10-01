@@ -60,5 +60,8 @@ class Vec3i(
 
         fun wrap(vec: VecI<*>, offset: Int = 0) =
             Vec3i(vec.data, vec.offset + offset)
+
+        fun distribute(scalar: Int) =
+            Vec3i(scalar, scalar, scalar)
     }
 }

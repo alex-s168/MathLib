@@ -92,5 +92,8 @@ class Color(
 
         fun wrap(vec: VecF<*>, offset: Int = 0): Color =
             Color(vec.data, vec.offset + offset)
+
+        fun distribute(scalar: Float) =
+            Color(scalar, scalar, scalar, scalar)
     }
 }

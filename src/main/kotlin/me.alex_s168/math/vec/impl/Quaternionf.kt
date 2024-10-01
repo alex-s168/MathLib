@@ -132,19 +132,14 @@ data class Quaternionf(
         clone().also { it /= other }
 
     fun rotMat3(): Mat3f {
-        val x2 = x * x
-        val y2 = y * y
-        val z2 = z * z
-        val xy = x * y
-        val xz = x * z
-        val yz = y * z
-        val wx = w * x
-        val wy = w * y
-        val wz = w * z
+        val q0 = x
+        val q1 = y
+        val q2 = z
+        val q3 = w
         return Mat3f(
-            1f - 2f * (y2 + z2), 2f * (xy - wz), 2f * (xz + wy),
-            2f * (xy + wz), 1f - 2f * (x2 + z2), 2f * (yz - wx),
-            2f * (xz - wy), 2f * (yz + wx), 1f - 2f * (x2 + y2)
+            2f * (q0 * q0 + q1 * q1) - 1f, 2f * (q1 * q2 - q0 * q3), 2f * (q1 * q3 + q0 * q2),
+            2f * (q1 * q2 + q0 * q3), 2f * (q0 * q0 + q2 * q2) - 1f, 2f * (q2 * q3 - q0 * q1),
+            2f * (q1 * q3 - q0 * q2), 2f * (q2 * q3 + q0 * q1), 2f * (q0 * q0 + q3 * q3) - 1f
         )
     }
 

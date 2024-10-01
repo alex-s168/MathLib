@@ -121,6 +121,9 @@ class Mat4i(
                 0, 0, 1, 0,
                 0, 0, 0 ,1
             )
+
+        fun distribute(scalar: Int) =
+            Mat4i(scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar)
     }
 
 }

@@ -205,6 +205,9 @@ class Mat4f(
                 rotMat.m20, rotMat.m21, rotMat.m22, 0f,
                 0f, 0f, 0f, 1f
             )
+
+        fun distribute(scalar: Float) =
+            Mat4f(scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar)
     }
 
     fun translateSelf(x: Float, y: Float, z: Float): Mat4f {

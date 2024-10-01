@@ -44,5 +44,8 @@ class Vec2i(
 
         fun wrap(vec: VecI<*>, offset: Int = 0) =
             Vec2i(vec.data, vec.offset + offset)
+
+        fun distribute(scalar: Int) =
+            Vec2i(scalar, scalar)
     }
 }

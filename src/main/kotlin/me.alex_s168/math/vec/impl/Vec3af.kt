@@ -66,5 +66,8 @@ class Vec3af(
 
         fun fromGradians(v: Vec3f) =
             Vec3af(Anglef.fromGradians(v.x), Anglef.fromGradians(v.y), Anglef.fromGradians(v.z))
+
+        fun distribute(scalar: Anglef) =
+            Vec3af(scalar, scalar, scalar)
     }
 }

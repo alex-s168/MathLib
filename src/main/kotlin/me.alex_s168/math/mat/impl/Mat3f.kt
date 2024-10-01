@@ -77,5 +77,8 @@ class Mat3f(
 
         fun wrap(mat: MatF<*>, offset: Int = 0) =
             Mat3f(mat.data, mat.offset + offset)
+
+        fun distribute(scalar: Float) =
+            Mat3f(scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar)
     }
 }

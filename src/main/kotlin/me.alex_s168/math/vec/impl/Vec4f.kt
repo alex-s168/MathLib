@@ -54,5 +54,8 @@ class Vec4f(
 
         fun wrap(vec: VecF<*>, offset: Int = 0) =
             Vec4f(vec.data, vec.offset + offset)
+
+        fun distribute(scalar: Float) =
+            Vec4f(scalar, scalar, scalar, scalar)
     }
 }

@@ -1,40 +1,38 @@
 package me.alex_s168.math
 
-data class Anglef(
-    internal val valRadians: Float
+@JvmInline
+value class Anglef(
+    val radians: Float
 ) {
-    val radians = valRadians
-
     val degrees get() =
-        valRadians * 180f / Math.PI.toFloat()
+        radians * 180f / Math.PI.toFloat()
 
     val gradians get() =
-        valRadians * 200f / Math.PI.toFloat()
+        radians * 200f / Math.PI.toFloat()
 
-    val normalized by lazy {
-        Anglef(valRadians % (2 * Math.PI.toFloat()))
-    }
+    fun normalized() =
+        Anglef(radians % (2 * Math.PI.toFloat()))
 
     operator fun plus(other: Anglef) =
-        Anglef(valRadians + other.valRadians)
+        Anglef(radians + other.radians)
 
     operator fun minus(other: Anglef) =
-        Anglef(valRadians - other.valRadians)
+        Anglef(radians - other.radians)
 
     operator fun times(other: Anglef) =
-        Anglef(valRadians * other.valRadians)
+        Anglef(radians * other.radians)
 
     operator fun div(other: Anglef) =
-        Anglef(valRadians / other.valRadians)
+        Anglef(radians / other.radians)
 
     operator fun times(other: Float) =
-        Anglef(valRadians * other)
+        Anglef(radians * other)
 
     operator fun div(other: Float) =
-        Anglef(valRadians / other)
+        Anglef(radians / other)
 
     operator fun unaryMinus() =
-        Anglef(-valRadians)
+        Anglef(-radians)
 
     override fun toString(): String {
         return "$degrees°"

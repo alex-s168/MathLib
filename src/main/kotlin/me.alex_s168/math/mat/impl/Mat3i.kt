@@ -78,6 +78,9 @@ class Mat3i(
 
         fun wrap(mat: MatI<*>, offset: Int = 0) =
             Mat3i(mat.data, mat.offset + offset)
+
+        fun distribute(scalar: Int) =
+            Mat3i(scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar, scalar)
     }
 
 }

@@ -51,5 +51,8 @@ class Mat2f(
 
         fun wrap(mat: MatF<*>, offset: Int = 0) =
             Mat2f(mat.data, mat.offset + offset)
+
+        fun distribute(scalar: Float) =
+            Mat2f(scalar, scalar, scalar, scalar)
     }
 }
